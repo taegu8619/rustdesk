@@ -4,12 +4,44 @@
 )]
 
 use librustdesk::*;
+use std::fs;
+use toml::Value;
+use std::env;
+
+/// `config.toml` 파일에서 ID 서버와 키를 읽어오는 함수
+fn load_config() -> (String, String) {
+    // `config.toml` 파일을 읽어옴
+    let config_str = fs::read_to_string("config.toml").expect("Failed to read config.toml");
+    let config: Value = config_str.parse().expect("Failed to parse config.toml");
+
+    // ID 서버와 키 값을 추출
+    let id_server = config["options"]["id_server"]
+        .as_str()
+        .expect("Missing id_server in config.toml")
+        .to_string();
+
+    let key = config["options"]["key"]
+        .as_str()
+        .expect("Missing key in config.toml")
+        .to_string();
+
+    (id_server, key)
+}
 
 #[cfg(any(target_os = "android", target_os = "ios", feature = "flutter"))]
 fn main() {
     if !common::global_init() {
         return;
     }
+
+    // `config.toml`에서 ID 서버와 키를 읽어옴
+    let (id_server, key) = load_config();
+
+    // 환경 변수로 설정
+    env::set_var("RUSTDESK_ID_SERVER", id_server);
+    env::set_var("RUSTDESK_KEY", key);
+
+    // 서버 테스트 및 실행
     common::test_rendezvous_server();
     common::test_nat_type();
     common::global_clean();
@@ -25,10 +57,19 @@ fn main() {
     if !common::global_init() {
         return;
     }
+
+    // `config.toml`에서 ID 서버와 키를 읽어옴
+    let (id_server, key) = load_config();
+
+    // 환경 변수로 설정
+    env::set_var("RUSTDESK_ID_SERVER", id_server);
+    env::set_var("RUSTDESK_KEY", key);
+
     #[cfg(all(windows, not(feature = "inline")))]
     unsafe {
         winapi::um::shellscalingapi::SetProcessDpiAwareness(2);
     }
+
     if let Some(args) = crate::core_main::core_main().as_mut() {
         ui::start(args);
     }
@@ -40,6 +81,14 @@ fn main() {
     if !common::global_init() {
         return;
     }
+
+    // `config.toml`에서 ID 서버와 키를 읽어옴
+    let (id_server, key) = load_config();
+
+    // 환경 변수로 설정
+    env::set_var("RUSTDESK_ID_SERVER", id_server);
+    env::set_var("RUSTDESK_KEY", key);
+
     use clap::App;
     use hbb_common::log;
     let args = format!(
