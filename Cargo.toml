@@ -81,6 +81,7 @@ libloading = "0.8"
 fon = "0.6"
 zip = "0.6"
 shutdown_hooks = "0.1"
+toml = "0.7"
 totp-rs = { version = "5.4", default-features = false, features = ["gen_secret", "otpauth"] }
 
 [target.'cfg(not(target_os = "linux"))'.dependencies]
@@ -217,6 +218,5 @@ rpath = true
 split-debuginfo = '...'  # Platform-specific.
 #strip = "debuginfo" 
 
-[dependencies]
-toml = "0.7"
+
 
