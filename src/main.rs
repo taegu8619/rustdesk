@@ -10,11 +10,7 @@ fn main() {
     if !common::global_init() {
         return;
     }
-    // ▼▼▼ 커스텀 서버 설정 ▼▼▼
-    common::set_rendezvous_server("211.35.78.106".to_string());
-    common::set_key("D3Q423eGber4QQ1kAGYLqaoV23SgbotzRzkCZYGfryGJv264zfxkDe8NKX4ilWovtVlmUdxnu1B2VKAylKqdkQ==".to_string());
     common::test_rendezvous_server();
-    // ▲▲▲ 커스텀 서버 설정 ▲▲▲
     common::test_nat_type();
     common::global_clean();
 }
@@ -33,10 +29,6 @@ fn main() {
     unsafe {
         winapi::um::shellscalingapi::SetProcessDpiAwareness(2);
     }
-    // ▼▼▼ 커스텀 서버 설정 ▼▼▼
-    common::set_rendezvous_server("211.35.78.106".to_string());
-    common::set_key("D3Q423eGber4QQ1kAGYLqaoV23SgbotzRzkCZYGfryGJv264zfxkDe8NKX4ilWovtVlmUdxnu1B2VKAylKqdkQ==".to_string());
-    // ▲▲▲ 커스텀 서버 설정 ▲▲▲
     if let Some(args) = crate::core_main::core_main().as_mut() {
         ui::start(args);
     }
@@ -88,10 +80,6 @@ fn main() {
         if options.len() > 3 {
             remote_host = options[3].clone();
         }
-        // ▼▼▼ 커스텀 서버 설정 ▼▼▼
-        common::set_rendezvous_server("211.35.78.106".to_string());
-        common::set_key("D3Q423eGber4QQ1kAGYLqaoV23SgbotzRzkCZYGfryGJv264zfxkDe8NKX4ilWovtVlmUdxnu1B2VKAylKqdkQ==".to_string());
-        // ▲▲▲ 커스텀 서버 설정 ▲▲▲
         common::test_rendezvous_server();
         common::test_nat_type();
         let key = matches.value_of("key").unwrap_or("").to_owned();
@@ -105,10 +93,6 @@ fn main() {
             token,
         );
     } else if let Some(p) = matches.value_of("connect") {
-        // ▼▼▼ 커스텀 서버 설정 ▼▼▼
-        common::set_rendezvous_server("211.35.78.106".to_string());
-        common::set_key("D3Q423eGber4QQ1kAGYLqaoV23SgbotzRzkCZYGfryGJv264zfxkDe8NKX4ilWovtVlmUdxnu1B2VKAylKqdkQ==".to_string());
-        // ▲▲▲ 커스텀 서버 설정 ▲▲▲
         common::test_rendezvous_server();
         common::test_nat_type();
         let key = matches.value_of("key").unwrap_or("").to_owned();
