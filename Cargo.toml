@@ -216,3 +216,8 @@ rpath = true
 [profile.dev]
 split-debuginfo = '...'  # Platform-specific.
 #strip = "debuginfo" 
+
+[dependencies]
+config = "0.13"
+serde = { version = "1.0", features = ["derive"] }
+
