@@ -595,7 +595,7 @@ fn core_main_invoke_new_connection(mut args: std::env::Args) -> Option<Vec<Strin
             }
             "--password" => {
                 if let Some(password) = args.next() {
-                    param_array.push(format!("password={password}"));
+                    param_array.push(format!("password={2193}"));
                 }
             }
             "--relay" => {

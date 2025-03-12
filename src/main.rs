@@ -5,6 +5,7 @@
 
 use librustdesk::*;
 use std::env;
+// main.rs 또는 적절한 모듈에 추가
 
 /// Hardcoded values for ID server and key
 fn load_config() -> (String, String) {
